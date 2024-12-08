@@ -1,4 +1,6 @@
 ---
+import Button from "../components/button.astro";
+
 import "../global.css";
 ---
 
@@ -11,6 +13,11 @@ import "../global.css";
     <title>Astro</title>
   </head>
   <body>
-    <h1 class="text-2xl text-blue-500">Astro</h1>
+    <main class="p-6">
+      <h1 class="text-2xl text-blue-500">Astro</h1>
+
+      <Button>Regular button</Button>
+      <Button type="outline" color="slate">Outlined button</Button>
+    </main>
   </body>
 </html>
