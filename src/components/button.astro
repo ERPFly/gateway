@@ -49,13 +49,31 @@ const button = cva([], {
   ],
 });
 
-type Props = VariantProps<typeof button> & {
+type TBaseProps = VariantProps<typeof button>;
+
+type TLinkProps = TBaseProps & {
   href?: string;
+  target?: HTMLAnchorElement["target"];
 };
 
-const { type = "solid", color = "blue", href } = Astro.props;
+type TButtonProps = TBaseProps & {
+  href?: never;
+  target?: never;
+};
+
+type Props = TButtonProps | TLinkProps;
+
+const { type = "solid", color = "blue", href, target } = Astro.props;
 ---
 
-<button class={button({ type, color })}>
-  <slot />
-</button>
+{
+  href ? (
+    <a href={href} target={target} class={button({ type, color })}>
+      <slot />
+    </a>
+  ) : (
+    <button class={button({ type, color })}>
+      <slot />
+    </button>
+  )
+}
